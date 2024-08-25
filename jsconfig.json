@@ -1,11 +1,8 @@
 {
-  "compileOptions": {
-    "baseUrl": "./",
+  "compilerOptions": {
     "paths": {
-      "@/*": ["src/"]
-    },
-    "allowSyntheticDefaultImports": true,
-    "exclude": ["node_modules", "dist", "temp"],
-    "include": ["src/**/*", "types/**/*"]
-  }
+      "@/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
 }

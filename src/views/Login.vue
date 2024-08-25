@@ -1,13 +1,7 @@
 <template>
   <van-form>
     <van-cell-group inset>
-      <van-field
-        v-model="username"
-        name="用户名"
-        label="用户名"
-        placeholder="用户名"
-        :rules="[{ required: true, message: '请填写用户名' }]"
-      />
+      <van-field v-model="username" name="用户名" label="用户名" placeholder="用户名" :rules="[{ required: true, message: '请填写用户名' }]" />
       <van-field
         v-model="password"
         type="password"
@@ -18,13 +12,18 @@
       />
     </van-cell-group>
     <div style="margin: 16px">
-      <van-button round block type="primary" native-type="submit">
-        提交
-      </van-button>
+      <van-button round block type="primary" native-type="submit"> 提交 </van-button>
     </div>
   </van-form>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+
+const formData = ref({
+  username: undefined,
+  password: undefined,
+})
+</script>
 
 <style lang="less" scoped></style>
