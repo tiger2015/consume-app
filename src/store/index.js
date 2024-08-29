@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import userInfo from './user/userInfo'
+import userInfo from '@/store/modules/userInfo'
 const store = createStore({
   modules: {
     user: userInfo,

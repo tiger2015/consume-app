@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { showNotify } from 'vant'
+import { showToast } from 'vant'
+import store from '@/store'
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -11,6 +12,9 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   function (config) {
+    if (store && store.state.user) {
+      config.headers.Authorization = store.state.user.token
+    }
     return config
   },
   function (error) {
@@ -19,11 +23,27 @@ instance.interceptors.request.use(
 )
 
 instance.interceptors.response.use(
-  function (response) {},
+  function (response) {
+    if (response.status !== 200) {
+      return Promise.reject('系统内部错误')
+    }
+    if (response.config.responseType === 'blob' || response.config.responseType === 'arraybuffer') {
+      return response
+    }
+    if (response.data.code === 200) {
+      return response.data
+    }
+    showToast({
+      type: 'fail',
+      message: response.data.message,
+    })
+    return Promise.reject(new Error(response.data.message))
+  },
   function (error) {
-    showNotify({
-      type: 'danger',
-      message: error,
+    console.info('error', error)
+    showToast({
+      type: 'fail',
+      message: error.message,
     })
     return Promise.reject(error)
   }
