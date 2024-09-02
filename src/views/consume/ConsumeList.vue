@@ -7,21 +7,26 @@
         <van-date-picker :columns-type="['year', 'month']" @cancel="showDatePicker = false" @confirm="confirmDate" />
       </van-popup>
     </van-form>
+    <van-button type="primary" @click="add">添加</van-button>
     <van-pull-refresh v-model="refreshing">
       <van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <van-cell v-for="item in list" :key="item" :title="item" />
       </van-list>
     </van-pull-refresh>
   </div>
+  <edit-consume-dialog ref="editDialog"></edit-consume-dialog>
 </template>
 <script setup>
 import { ref } from 'vue'
+import EditConsumeDialog from '@/components/EditConsumeDialog.vue'
 
 const showDatePicker = ref(false)
 
 const formData = ref({
   startDate: undefined,
 })
+
+const editDialog = ref()
 
 const confirmDate = ({ selectedValues }) => {
   formData.value.startDate = `${selectedValues[0]}年${selectedValues[1]}月`
@@ -30,6 +35,10 @@ const confirmDate = ({ selectedValues }) => {
 
 const onClickLeft = () => {
   history.back()
+}
+
+const add = () => {
+  editDialog.value.open()
 }
 </script>
 <style scoped></style>
