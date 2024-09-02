@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { showToast } from 'vant'
+// 手动导入会导致样式丢失
+// import { showToast } from 'vant'
 import store from '@/store'
 
 const instance = axios.create({
@@ -48,5 +49,6 @@ instance.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+
 
 export default instance

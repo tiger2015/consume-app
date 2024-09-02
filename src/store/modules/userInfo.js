@@ -17,6 +17,7 @@ const userInfo = {
   },
   getters: {
     isLogin(state) {
+      console.log(state.token)
       return state.token != undefined
     },
   },

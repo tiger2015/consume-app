@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-nav-bar title="消费详情" />
+    <van-nav-bar title="消费详情" left-text="返回" left-arrow @click-left="onClickLeft" />
     <van-form>
       <van-field name="datePicker" label="消费日期" @click="showDatePicker = true" v-model="formData.startDate" />
       <van-popup v-model:show="showDatePicker" position="bottom">
@@ -26,6 +26,10 @@ const formData = ref({
 const confirmDate = ({ selectedValues }) => {
   formData.value.startDate = `${selectedValues[0]}年${selectedValues[1]}月`
   showDatePicker.value = false
+}
+
+const onClickLeft = () => {
+  history.back()
 }
 </script>
 <style scoped></style>

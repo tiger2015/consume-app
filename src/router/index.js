@@ -11,6 +11,7 @@ const routes = [
     name: 'home',
     path: '/home',
     component: () => import('@/views/Home.vue'),
+    redirect: '/consume',
     children: [
       {
         name: 'consume',
@@ -20,9 +21,19 @@ const routes = [
     ],
   },
   {
+    name: 'setting',
+    path: '/setting',
+    component: () => import('@/views/Setting.vue'),
+  },
+  {
     name: 'consumelist',
     path: '/consume/list',
     component: () => import('@/views/consume/ConsumeList.vue'),
+  },
+  {
+    name: 'consumestat',
+    path: '/consume/stat',
+    component: () => import('@/views/consume/ConsumeStat.vue'),
   },
 ]
 
@@ -36,12 +47,11 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   let isLogin = store.getters['user/isLogin']
   console.log(to, isLogin)
-  if (!isLogin) {
-    if (to.path === '/') {
-      next()
-    } else {
-      router.push('/')
-    }
+  // 用户未登录
+  if (!isLogin && to.name !== 'login') {
+    next({ name: 'login' })
+  } else if (isLogin && to.name === 'login') {
+    next({ name: 'home' })
   } else {
     next()
   }

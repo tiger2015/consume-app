@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --mode dev",
+    "test": "vite --mode test",
     "build": "vite build --mode production",
     "preview": "vite preview"
   },
@@ -13,7 +14,8 @@
     "vant": "^4.9.4",
     "vue": "^3.4.35",
     "vue-router": "^4.4.3",
-    "vuex": "^4.1.0"
+    "vuex": "^4.1.0",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@vant/auto-import-resolver": "^1.2.1",
