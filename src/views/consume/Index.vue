@@ -5,8 +5,6 @@
         <van-image :src="menu.img" fit="cover"></van-image>
         <span>{{ menu.label }}</span>
       </van-grid-item>
-      <!-- <van-grid-item icon="records" text="消费详情" to="/consume/list" />
-      <van-grid-item icon="photo-o" text="消费统计" /> -->
     </van-grid>
   </div>
 </template>
@@ -15,11 +13,16 @@ import { useRouter } from 'vue-router'
 
 const menus = [
   {
-    label: '消费管理',
+    label: '消费查询',
     path: '/consume/list',
-    img: '/消费记录.png',
+    img: '消费记录.png',
   },
-  { label: '消费统计', path: '/consume/stat', img: '/消费统计.png' },
+  { label: '消费统计', path: '/consume/stat', img: '消费统计.png' },
+  {
+    label: '添加记录',
+    path: '/consume/add',
+    img: '添加记录.png',
+  },
 ]
 
 const router = useRouter()

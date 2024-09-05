@@ -32,8 +32,14 @@ instance.interceptors.response.use(
       return response
     }
     if (response.data.code === 200) {
-      return response.data
+      return response.data.data
     }
+    // token无效或会话失效
+    if (response.data.code === 4005 || response.data.code === 4006) {
+      store.commit('user/resetUserInfo')
+      window.location.href = '/'
+    }
+
     showToast({
       type: 'fail',
       message: response.data.message,
@@ -49,6 +55,5 @@ instance.interceptors.response.use(
     return Promise.reject(error)
   }
 )
-
 
 export default instance

@@ -1,21 +1,8 @@
 <template>
   <van-form @submit="sumbitForm">
     <van-cell-group inset>
-      <van-field
-        v-model="formData.username"
-        name="用户名"
-        label="用户名"
-        placeholder="用户名"
-        :rules="[{ required: true, message: '请填写用户名' }]"
-      />
-      <van-field
-        v-model="formData.password"
-        type="password"
-        name="密码"
-        label="密码"
-        placeholder="密码"
-        :rules="[{ required: true, message: '请填写密码' }]"
-      />
+      <van-field v-model="formData.username" name="用户名" label="用户名" placeholder="用户名" :rules="[{ required: true, message: '请填写用户名' }]" />
+      <van-field v-model="formData.password" type="password" name="密码" label="密码" placeholder="密码" :rules="[{ required: true, message: '请填写密码' }]" />
     </van-cell-group>
     <div style="margin: 2vw">
       <van-button round block type="primary" native-type="submit"> 提交 </van-button>
@@ -42,12 +29,7 @@ const sumbitForm = async () => {
   let result = await login(toRaw(formData.value))
   if (result) {
     // 登录成功
-    console.log(result)
-    console.log(store)
-    if (!result.data.token) {
-      result.data.token = result.data.tokenValue
-    }
-    store.commit('user/setUserInfo', result.data)
+    store.commit('user/setUserInfo', result)
     router.push({ path: '/home' })
   } else {
   }

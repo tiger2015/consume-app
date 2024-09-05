@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Login from '@/views/Login.vue'
+import Index from '@/views/Index.vue'
 import store from '@/store'
 const routes = [
   {
@@ -8,22 +9,29 @@ const routes = [
     component: Login,
   },
   {
-    name: 'home',
-    path: '/home',
-    component: () => import('@/views/Home.vue'),
-    redirect: '/consume',
+    name: 'index',
+    path: '/index',
+    component: Index,
     children: [
       {
-        name: 'consume',
-        path: '/consume',
-        component: () => import('@/views/consume/Index.vue'),
+        name: 'home',
+        path: '/home',
+        component: () => import('@/views/Home.vue'),
+        redirect: '/consume',
+        children: [
+          {
+            name: 'consume',
+            path: '/consume',
+            component: () => import('@/views/consume/Index.vue'),
+          },
+        ],
+      },
+      {
+        name: 'setting',
+        path: '/setting',
+        component: () => import('@/views/Setting.vue'),
       },
     ],
-  },
-  {
-    name: 'setting',
-    path: '/setting',
-    component: () => import('@/views/Setting.vue'),
   },
   {
     name: 'consumelist',
@@ -34,6 +42,11 @@ const routes = [
     name: 'consumestat',
     path: '/consume/stat',
     component: () => import('@/views/consume/ConsumeStat.vue'),
+  },
+  {
+    name: 'consumesadd',
+    path: '/consume/add',
+    component: () => import('@/views/consume/ConsumeAdd.vue'),
   },
 ]
 

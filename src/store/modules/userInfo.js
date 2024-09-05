@@ -14,10 +14,14 @@ const userInfo = {
       state.token = userInfo.token
       state.avatar = userInfo.avatar
     },
+    resetUserInfo(state) {
+      state.username = undefined
+      state.token = undefined
+      state.avatar = undefined
+    },
   },
   getters: {
     isLogin(state) {
-      console.log(state.token)
       return state.token != undefined
     },
   },
